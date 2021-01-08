@@ -217,6 +217,25 @@ public:
 	 */
 	complex<double> decryptSingle(SecretKey& secretKey, Ciphertext& cipher);
 
+	/**
+	 * decrypts ciphertext without decoding
+	 * @param[in] secretKey: secret key
+	 * @param[in] cipher: ciphertext
+	 * @return plaintext
+	 */
+	Plaintext decrypt_no_decode(SecretKey& secretKey, Ciphertext& cipher);
+
+	/**
+	 * decrypts ciphertext without decoding
+	 * @param[in] secretKey: secret key
+	 * @param[in] cipher: ciphertext
+	 * @return plaintext
+	 */
+
+	Plaintext decrypt_no_decodeSingle(SecretKey& secretKey, Ciphertext& cipher);
+
+	ZZX balance_polynomial(ZZX poly, long logq);
+
 
 	//----------------------------------------------------------------------------------
 	//   HOMOMORPHIC OPERATIONS

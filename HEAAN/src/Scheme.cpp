@@ -199,9 +199,15 @@ Ciphertext Scheme::encryptZeros(long slots, long logp, long logq) {
 	czeros.slots = slots;
 	return czeros;
 }
+
 complex<double>* Scheme::decrypt(SecretKey& secretKey, Ciphertext& cipher) {
 	Plaintext msg = decryptMsg(secretKey, cipher);
 	return decode(msg);
+}
+
+Plaintext Scheme::decrypt_no_decode(SecretKey& secretKey, Ciphertext& cipher){
+	Plaintext msg = decryptMsg(secretKey, cipher);
+	return msg;
 }
 
 Ciphertext Scheme::encryptSingle(double val, long logp, long logq) {
@@ -219,6 +225,24 @@ complex<double> Scheme::decryptSingle(SecretKey& secretKey, Ciphertext& cipher) 
 	return decodeSingle(msg);
 }
 
+Plaintext Scheme::decrypt_no_decodeSingle(SecretKey& secretKey, Ciphertext& cipher){
+	Plaintext msg = decryptMsg(secretKey, cipher);
+	return msg;
+}
+
+ZZX Scheme::balance_polynomial(ZZX poly, long logq){
+
+	ZZ q = context.qpowvec[logq];
+	int n = deg(poly);
+
+	for(int i = 0; i < n + 1; i++){
+
+		if (poly[i] >q/2){
+			poly[i] -= q;
+		}
+	}
+	return poly;
+}
 
 //----------------------------------------------------------------------------------
 //   HOMOMORPHIC OPERATIONS
