@@ -254,6 +254,16 @@ public:
 	 */
 	Ciphertext* functionExtended(Ciphertext& cipher, string& funcName, const long logp, const long degree);
 
+	/**
+	 * Calculating function using Taylor Series approximation with custom coefficients
+	 * @param[in] cipher: ciphertext(m)
+	 * @param[in] coeffs: coefficients of the function
+	 * @param[in] logp: log of precision
+	 * @param[in] degree: taylor approximation degree
+	 * @return [ciphertext(funcName(m)), ... ,ciphertext(funcName(m))]
+	 */
+	Ciphertext function_coeffs(Ciphertext& cipher, vector<double> coeffs, const long logp, const long degree);
+
 
 	//----------------------------------------------------------------------------------
 	//   FFT & FFT INVERSE

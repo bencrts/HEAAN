@@ -348,6 +348,25 @@ Ciphertext* SchemeAlgo::functionExtended(Ciphertext& cipher, string& funcName, c
 	return res;
 }
 
+Ciphertext SchemeAlgo::function_coeffs(Ciphertext& cipher, vector<double> coeffs, const long logp, const long degree) {
+	Ciphertext* cpows = powerExtended(cipher, logp, degree);
+
+	long dlogp = 2 * logp;
+
+	Ciphertext res = scheme.multByConst(cpows[0], coeffs[1], logp);
+	scheme.addConstAndEqual(res, coeffs[0], dlogp);
+
+	for (int i = 1; i < degree; ++i) {
+		if(abs(coeffs[i + 1]) > 1e-27) {
+			Ciphertext aixi = scheme.multByConst(cpows[i], coeffs[i + 1], logp);
+			scheme.modDownToAndEqual(res, aixi.logq);
+			scheme.addAndEqual(res, aixi);
+		}
+	}
+	scheme.reScaleByAndEqual(res, logp);
+	return res;
+}
+
 
 //----------------------------------------------------------------------------------
 //   FFT & FFT INVERSE
