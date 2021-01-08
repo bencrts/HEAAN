@@ -260,7 +260,7 @@ public:
 	 * @param[in] coeffs: coefficients of the function
 	 * @param[in] logp: log of precision
 	 * @param[in] degree: taylor approximation degree
-	 * @return [ciphertext(funcName(m)), ... ,ciphertext(funcName(m))]
+	 * @return ciphertext
 	 */
 	Ciphertext function_coeffs(Ciphertext& cipher, vector<double> coeffs, const long logp, const long degree);
 
